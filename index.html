@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenLeaf Organics</title>
+    <style>
+        :root {
+            --primary-bg: #2E7D32;          /* deep green */
+            --accent-bg: #FFB300;           /* amber */
+            --neutral-bg: #F5F5F5;          /* light gray */
+            --text-primary: #212121;        /* dark */
+            --text-light: #FFFFFF;          /* white */
+            --max-width: 1200px;
+        }
+        * { box-sizing: border-box; margin:0; padding:0; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+        a { text-decoration: none; color: inherit; }
+        header {
+            background: var(--primary-bg);
+            color: var(--text-light);
+        }
+        header .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        header nav a {
+            margin-left: 1.5rem;
+            color: var(--text-light);
+            font-weight: bold;
+        }
+        /* Hero */
+        #hero {
+            background: url('https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            color: var(--text-light);
+            text-align: center;
+            padding: 8rem 1rem;
+            position: relative;
+        }
+        #hero::before {
+            content:"";
+            position:absolute;
+            inset:0;
+            background:rgba(46,125,50,0.7);
+        }
+        #hero .content {
+            position:relative;
+            max-width: 800px;
+            margin:auto;
+        }
+        #hero h1 { font-size: 2.5rem; margin-bottom: .5rem; }
+        #hero p { font-size: 1.2rem; margin-bottom: 1.5rem; }
+        #hero .cta {
+            background: var(--accent-bg);
+            color: var(--text-primary);
+            padding: .75rem 1.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+        /* About */
+        #about {
+            background: var(--neutral-bg);
+            padding: 4rem 1rem;
+        }
+        #about .container {
+            max-width: var(--max-width);
+            margin:auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        #about img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 8px;
+        }
+        #about .text {
+            flex:1;
+        }
+        #about h2 { margin-bottom: .5rem; }
+        #about ul {
+            margin-top:1rem;
+            list-style: disc inside;
+        }
+        /* Product Showcase */
+        #product_showcase {
+            padding: 4rem 1rem;
+        }
+        #product_showcase .container {
+            max-width: var(--max-width);
+            margin:auto;
+        }
+        #product_showcase h2 { text-align:center; margin-bottom: .5rem; }
+        #product_showcase p { text-align:center; margin-bottom:2rem; }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+            gap: 1.5rem;
+        }
+        .product-card {
+            background:#fff;
+            border:1px solid #e0e0e0;
+            border-radius:8px;
+            overflow:hidden;
+            display:flex;
+            flex-direction:column;
+        }
+        .product-card img {
+            width:100%;
+            height:180px;
+            object-fit:cover;
+        }
+        .product-card .info {
+            padding:1rem;
+            flex:1;
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+        }
+        .product-card h3 { margin-bottom:.5rem; font-size:1.1rem; }
+        .product-card .price { font-weight:bold; color:var(--primary-bg); }
+        .product-card button {
+            margin-top:1rem;
+            background:var(--primary-bg);
+            color:var(--text-light);
+            border:none;
+            padding:.5rem;
+            cursor:pointer;
+            border-radius:4px;
+        }
+        /* Weekly Deals */
+        #weekly_deals {
+            background: var(--accent-bg);
+            color: var(--text-primary);
+            padding:4rem 1rem;
+        }
+        #weekly_deals .container {
+            max-width: var(--max-width);
+            margin:auto;
+        }
+        #weekly_deals h2 { text-align:center; margin-bottom:.5rem; }
+        #weekly_deals p { text-align:center; margin-bottom:2rem; }
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+            gap:1.5rem;
+        }
+        .deal-card {
+            background:#fff;
+            border-radius:8px;
+            overflow:hidden;
+            position:relative;
+            display:flex;
+            flex-direction:column;
+        }
+        .deal-card img {
+            width:100%;
+            height:180px;
+            object-fit:cover;
+        }
+        .deal-card .info {
+            padding:1rem;
+            flex:1;
+        }
+        .deal-card .discount {
+            position:absolute;
+            top:10px;
+            left:10px;
+            background:#e53935;
+            color:#fff;
+            padding:.25rem .5rem;
+            font-size:.8rem;
+            border-radius:4px;
+        }
+        .deal-card h3 { margin-bottom:.5rem; }
+        .deal-card .price { font-weight:bold; color:var(--primary-bg); }
+        .deal-card button {
+            margin-top:auto;
+            background:var(--primary-bg);
+            color:var(--text-light);
+            border:none;
+            padding:.5rem;
+            cursor:pointer;
+            border-radius:0 0 8px 8px;
+        }
+        .cta-button {
+            display:block;
+            margin:2rem auto 0;
+            background:var(--primary-bg);
+            color:var(--text-light);
+            padding:.75rem 1.5rem;
+            border:none;
+            cursor:pointer;
+            border-radius:4px;
+            font-size:1rem;
+        }
+        /* Delivery Signup */
+        #delivery_signup {
+            background: var(--neutral-bg);
+            padding:4rem 1rem;
+        }
+        #delivery_signup .container {
+            max-width: var(--max-width);
+            margin:auto;
+            display:flex;
+            gap:2rem;
+            flex-wrap:wrap;
+        }
+        #delivery_signup form {
+            flex:1 1 300px;
+            background:#fff;
+            padding:1.5rem;
+            border-radius:8px;
+            box-shadow:0 2px 5px rgba(0,0,0,0.1);
+        }
+        #delivery_signup label {
+            display:block;
+            margin-top:1rem;
+            font-weight:bold;
+        }
+        #delivery_signup input, #delivery_signup select {
+            width:100%;
+            padding:.5rem;
+            margin-top:.25rem;
+            border:1px solid #ccc;
+            border-radius:4px;
+        }
+        #delivery_signup button {
+            margin-top:1.5rem;
+            width:100%;
+            background:var(--primary-bg);
+            color:var(--text-light);
+            border:none;
+            padding:.75rem;
+            cursor:pointer;
+            border-radius:4px;
+        }
+        #delivery_signup .map {
+            flex:1 1 300px;
+            min-height:300px;
+        }
+        /* Delivery Info */
+        #delivery_info {
+            background: var(--neutral-bg);
+            padding:4rem 1rem;
+        }
+        #delivery_info .container {
+            max-width: var(--max-width);
+            margin:auto;
+            text-align:center;
+        }
+        #delivery_info ul {
+            list-style:none;
+            margin-top:1rem;
+        }
+        #delivery_info li {
+            margin: .5rem 0;
+        }
+        /* Contact Form */
+        #contact_form {
+            background: var(--neutral-bg);
+            padding:4rem 1rem;
+        }
+        #contact_form .container {
+            max-width: var(--max-width);
+            margin:auto;
+            display:flex;
+            gap:2rem;
+            flex-wrap:wrap;
+        }
+        #contact_form form {
+            flex:1 1 300px;
+            background:#fff;
+            padding:1.5rem;
+            border-radius:8px;
+            box-shadow:0 2px 5px rgba(0,0,0,0.1);
+        }
+        #contact_form .contact-info {
+            flex:1 1 300px;
+            background:#fff;
+            padding:1.5rem;
+            border-radius:8px;
+            box-shadow:0 2px 5px rgba(0,0,0,0.1);
+        }
+        #contact_form label {
+            display:block;
+            margin-top:1rem;
+            font-weight:bold;
+        }
+        #contact_form input, #contact_form textarea {
+            width:100%;
+            padding:.5rem;
+            margin-top:.25rem;
+            border:1px solid #ccc;
+            border-radius:4px;
+        }
+        #contact_form textarea { resize:vertical; height:120px; }
+        #contact_form button {
+            margin-top:1.5rem;
+            width:100%;
+            background:var(--primary-bg);
+            color:var(--text-light);
+            border:none;
+            padding:.75rem;
+            cursor:pointer;
+            border-radius:4px;
+        }
+        footer {
+            background: var(--primary-bg);
+            color: var(--text-light);
+            text-align:center;
+            padding:1rem;
+        }
+        @media (max-width:768px) {
+            header .container, #about .container, #delivery_signup .container, #contact_form .container {
+                flex-direction:column;
+                align-items:stretch;
+            }
+            #about img, #about .text { width:100%; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>GreenLeaf Organics</h1>
+            <nav>
+                <a href="#hero">Home</a>
+                <a href="#product_showcase">Products</a>
+                <a href="#about">About Us</a>
+                <a href="#delivery_info">Delivery Info</a>
+                <a href="#contact_form">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="content">
+                <h1>Freshness Delivered to Your Door</h1>
+                <p>Organic groceries, handpicked for your family and delivered right to your doorstep.</p>
+                <button class="cta">Shop Now</button>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&w=800&q=80" alt="GreenLeaf farm">
+                <div class="text">
+                    <h2>Our GreenLeaf Story</h2>
+                    <p>At GreenLeaf Organics, we believe that healthy families deserve the best. From local farms to your kitchen, we bring sustainably grown produce and pantry staples right to your doorstep.</p>
+                    <ul>
+                        <li>Sustainability</li>
+                        <li>Community Support</li>
+                        <li>Transparency</li>
+                        <li>Quality Assurance</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Showcase -->
+        <section id="product_showcase">
+            <div class="container">
+                <h2>Featured Fresh Picks</h2>
+                <p>Explore our curated selection of seasonal fruits, veggies, and pantry essentials—all certified organic and locally sourced.</p>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=400&q=80" alt="Organic Apples">
+                        <div class="info">
+                            <h3>Organic Apples</h3>
+                            <span class="price">$3.99 / lb</span>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1582515073490-399813c5c5c5?auto=format&fit=crop&w=400&q=80" alt="Organic Kale">
+                        <div class="info">
+                            <h3>Organic Kale</h3>
+                            <span class="price">$2.49 / bunch</span>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=400&q=80" alt="Organic Carrots">
+                        <div class="info">
+                            <h3>Organic Carrots</h3>
+                            <span class="price">$1.99 / lb</span>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1589923188900-5c5c5c5c5c5c?auto=format&fit=crop&w=400&q=80" alt="Organic Quinoa">
+                        <div class="info">
+                            <h3>Organic Quinoa</h3>
+                            <span class="price">$4.99 / lb</span>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1547516508-5c5c5c5c5c5c?auto=format&fit=crop&w=400&q=80" alt="Organic Blueberries">
+                        <div class="info">
+                            <h3>Organic Blueberries</h3>
+                            <span class="price">$5.49 / pint</span>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=400&q=80" alt="Organic Almond Milk">
+                        <div class="info">
+                            <h3>Organic Almond Milk</h3>
+                            <span class="price">$3.29 / quart</span>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Weekly Deals -->
+        <section id="weekly_deals">
+            <div class="container">
+                <h2>This Week's Deals</h2>
+                <p>Grab limited‑time savings on your favorite greens, berries, and more. Freshness never looked so good.</p>
+                <div class="deals-grid">
+                    <div class="deal-card">
+                        <div class="discount">-20%</div>
+                        <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80" alt="Strawberries">
+                        <div class="info">
+                            <h3>Organic Strawberries</h3>
+                            <span class="price">$4.79 / pint</span>
+                        </div>
+                        <button>Buy Now</button>
+                    </div>
+                    <div class="deal-card">
+                        <div class="discount">-15%</div>
+                        <img src="https://images.unsplash.com/photo-1518972559570-0c5c5c5c5c5c?auto=format&fit=crop&w=400&q=80" alt="Spinach">
+                        <div class="info">
+                            <h3>Organic Spinach</h3>
+                            <span class="price">$1.99 / bag</span>
+                        </div>
+                        <button>Buy Now</button>
+                    </div>
+                </div>
+                <button class="cta-button">See Deals</button>
+            </div>
+        </section>
+
+        <!-- Delivery Signup -->
+        <section id="delivery_signup">
+            <div class="container">
+                <form>
+                    <h2>Schedule Your Weekly Delivery</h2>
+                    <p>Sign up for a convenient, fresh‑produce delivery that fits your family's schedule. No hassle, no waste.</p>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="address">Delivery Address</label>
+                    <input type="text" id="address" name="address" required>
+                    <label for="schedule">Preferred Delivery Day</label>
+                    <select id="schedule" name="schedule">
+                        <option>Monday</option>
+                        <option>Wednesday</option>
+                        <option>Friday</option>
+                    </select>
+                    <button type="submit">Get Started</button>
+                </form>
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019123456789!2d-122.419415284681!3d37.774929779759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c5c5c5c5c%3A0x5c5c5c5c5c5c5c5c!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1600000000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Delivery Info -->
+        <section id="delivery_info">
+            <div class="container">
+                <h2>Delivery Made Simple</h2>
+                <p>We serve the entire GreenLeaf neighborhood with flexible windows, low fees, and eco‑friendly packaging. Find your zone and plan your deliveries today.</p>
+                <ul>
+                    <li><strong>Zones:</strong> All neighborhoods within a 15‑mile radius.</li>
+                    <li><strong>Fees:</strong> $5 per delivery (free for orders over $75).</li>
+                    <li><strong>Schedule:</strong> Choose any weekday between 8 am – 7 pm.</li>
+                    <li><strong>Policies:</strong> Cancel up to 24 hours before delivery.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section id="contact_form">
+            <div class="container">
+                <form>
+                    <h2>Get in Touch</h2>
+                    <p>Have questions, feedback, or need help? Reach out and our friendly team will respond within 24 hours.</p>
+                    <label for="cname">Name</label>
+                    <input type="text" id="cname" name="cname" required>
+                    <label for="cemail">Email</label>
+                    <input type="email" id="cemail" name="cemail" required>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p><strong>Phone:</strong> (555) 123‑4567</p>
+                    <p><strong>Email:</strong> support@greenleaforganics.com</p>
+                    <p><strong>Address:</strong> 123 Green Lane, GreenLeaf City, GA 30301</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 GreenLeaf Organics. All rights reserved.
+    </footer>
+</body>
+</html>
